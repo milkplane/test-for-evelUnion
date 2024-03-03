@@ -2,43 +2,34 @@ import { getRandomRange } from "@/src/getRandomRange";
 import axios from "axios";
 import SelectionScreen from "./(components)/SelectionScreen";
 
-type StatInfo = {
-  base_stat: number
-}
-
-export type Pokemon = {
-  height: number;
-  id: number;
-  stats: Array<StatInfo>;
-  seriesCount: number;
+export type PokemonEndPoint = {
   name: string;
-  sprites: {[key: string]: string};
+  url: string;
 }
 
-const createPokemonRequest = async (pokemonId: number) => {
-  const url = process.env.POKEMON_INFOS_HOST + `/${pokemonId}`;
-  const res = await axios.get<Pokemon>(url);
-  return res.data;
+type ResponsePokemonEndPoints = {
+  results: Array<PokemonEndPoint>;
 }
 
-const getPokemons = async () => {
-  const range = getRandomRange(100);
 
-  const pokemonIds = range.slice(0, 10).map(maybeZeroId => {
-    return maybeZeroId + 1;
-  });
 
-  const pokemonRequests = pokemonIds.map(id => {
-    return createPokemonRequest(id);
+const getPokemonUrls = async () => {
+  const res = await axios.get<ResponsePokemonEndPoints>(process.env.POKEMON_INFOS_HOST as string, {
+    params: {
+      offset: 0,
+      limit: 10,
+    }
   })
 
-  return await Promise.all(pokemonRequests);
+  return res.data.results;
 }
 
 export default async function Home() {
-  const pokemons = await getPokemons();
+  const pokemonEndPoints = await getPokemonUrls();
+
+  console.log(pokemonEndPoints);
 
   return (
-    <SelectionScreen pokemons={pokemons}/>
+    <SelectionScreen pokemonEndPoints={pokemonEndPoints}/>
   );
 }

@@ -1,27 +1,27 @@
 'use client'
 
 import { Chip } from "@mui/material";
-import { Pokemon } from "../page"
+import { PokemonEndPoint } from "../page"
 
 type PokemonSelectProps = {
-  pokemons: Array<Pokemon>;
-  onSelect: (id: number) => void;
+  pokemonEndPoints: Array<PokemonEndPoint>;
+  onSelect: (pokemonUrl: string) => void;
 }
 
 const PokemonSelect = (props: PokemonSelectProps) => {
-  const createHandleClick = (id: number) => {
+  const createHandleClick = (pokemonUrl: string) => {
     return () => {
-      props.onSelect(id);
+      props.onSelect(pokemonUrl);
     }
   }
 
-  const chips = props.pokemons.map((pokemon) => {
+  const chips = props.pokemonEndPoints.map((pokemonEndPoint) => {
     return (
       <Chip
-        label={pokemon.name}
+        label={pokemonEndPoint.name}
         color="primary"
-        onClick={createHandleClick(pokemon.id)}
-        key={pokemon.id}
+        onClick={createHandleClick(pokemonEndPoint.url)}
+        key={pokemonEndPoint.url}
       />
     )
   })
