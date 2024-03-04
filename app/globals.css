@@ -89,6 +89,10 @@ body {
   background-color: #131313;
 }
 
+body * {
+  font-family: var(--cool-raleway) !important;
+}
+
 a {
   color: inherit;
   text-decoration: none;
