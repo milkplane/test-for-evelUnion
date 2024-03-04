@@ -1,7 +1,7 @@
 'use client'
 
-import { Chip } from "@mui/material";
-import { PokemonEndPoint } from "../page"
+import { PokemonEndPoint } from "../../app/page"
+import MainChip from "../customizedComponents/MainChip";
 
 type PokemonSelectProps = {
   pokemonEndPoints: Array<PokemonEndPoint>;
@@ -17,7 +17,7 @@ const PokemonSelect = (props: PokemonSelectProps) => {
 
   const chips = props.pokemonEndPoints.map((pokemonEndPoint) => {
     return (
-      <Chip
+      <MainChip
         label={pokemonEndPoint.name}
         color="primary"
         onClick={createHandleClick(pokemonEndPoint.url)}

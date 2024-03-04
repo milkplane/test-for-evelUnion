@@ -1,6 +1,5 @@
-import { getRandomRange } from "@/src/getRandomRange";
 import axios from "axios";
-import SelectionScreen from "./(components)/SelectionScreen";
+import SelectionScreen from "../src/components/SelectionScreen";
 
 export type PokemonEndPoint = {
   name: string;
@@ -10,8 +9,6 @@ export type PokemonEndPoint = {
 type ResponsePokemonEndPoints = {
   results: Array<PokemonEndPoint>;
 }
-
-
 
 const getPokemonUrls = async () => {
   const res = await axios.get<ResponsePokemonEndPoints>(process.env.POKEMON_INFOS_HOST as string, {
