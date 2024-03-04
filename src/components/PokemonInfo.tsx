@@ -41,7 +41,7 @@ const PokemonInfo = (props: PokemonInfoProps) => {
       direction='column'
     >
       <Box px={5.5} pt={5.5} pb={2}>
-        <Typography variant="h1" mb={5.5}>{pokemon?.name}</Typography>
+        <Typography variant="h1" height='48px' mb={5.5}>{pokemon?.name}</Typography>
         <ImageContainer>
           <img src={pokemon?.sprites['front_shiny']}/> 
         </ImageContainer>

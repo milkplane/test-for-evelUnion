@@ -1,3 +1,5 @@
+'use client';
+
 import { createTheme } from "@mui/material";
 import { Raleway } from "next/font/google";
 
@@ -10,7 +12,7 @@ export const raleway = Raleway({
 export const mainTheme = createTheme({
   typography: {
     ...raleway.style,
-    
+
     h1: {
       fontWeight: 700,
       fontSize: 48,

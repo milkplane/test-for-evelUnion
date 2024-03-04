@@ -16,26 +16,34 @@ const SelectionScreen = (props: SelectionScreenProps) => {
 
   return (
     <ThemeProvider theme={mainTheme}>
-      <Grid 
-        item
-        container
-        xs={6}
-        height='auto'
-        gap={'10px 6px'}
-      >
-        <PokemonSelect
-          onSelect={setPokemonUrl}
-          pokemonEndPoints={props.pokemonEndPoints}
-        />
-      </Grid>
-      <Grid 
-        item
-        container
-        xs={6}
-        alignItems="center"
-        justifyContent="center"
-      >
-        <PokemonInfo pokemonUrl={pokemonUrl}/>
+      <Grid container>
+        <Grid 
+          item
+          container
+          xs={6}
+          alignItems='center'
+          justifyContent='center'
+        >
+          <Grid
+            container
+            height='auto'
+            gap={'10px 6px'}
+          >
+            <PokemonSelect
+              onSelect={setPokemonUrl}
+              pokemonEndPoints={props.pokemonEndPoints}
+            />
+          </Grid>
+        </Grid>
+        <Grid 
+          item
+          container
+          xs={6}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <PokemonInfo pokemonUrl={pokemonUrl}/>
+        </Grid>
       </Grid>
     </ThemeProvider>
   )
