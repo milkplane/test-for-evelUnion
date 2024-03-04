@@ -1,19 +1,10 @@
-'use client'
-
-import { useState } from "react";
-import { PokemonEndPoint } from "../../app/page"
 import PokemonSelect from "./PokemonSelect";
 import PokemonInfo from "./PokemonInfo";
 import { Grid, ThemeProvider } from "@mui/material";
 import { mainTheme } from "../themes/mainTheme";
+import { ParamsProps } from "@/app/[[...pokemon]]/page";
 
-type SelectionScreenProps = {
-  pokemonEndPoints: Array<PokemonEndPoint>;
-}
-
-const SelectionScreen = (props: SelectionScreenProps) => {
-  const [pokemonUrl, setPokemonUrl] = useState<string>(props.pokemonEndPoints[0].url);
-
+const SelectionScreen = ({ params }: ParamsProps) => {
   return (
     <ThemeProvider theme={mainTheme}>
       <Grid container>
@@ -29,10 +20,7 @@ const SelectionScreen = (props: SelectionScreenProps) => {
             height='auto'
             gap={'10px 6px'}
           >
-            <PokemonSelect
-              onSelect={setPokemonUrl}
-              pokemonEndPoints={props.pokemonEndPoints}
-            />
+            <PokemonSelect/>
           </Grid>
         </Grid>
         <Grid 
@@ -42,7 +30,7 @@ const SelectionScreen = (props: SelectionScreenProps) => {
           alignItems="center"
           justifyContent="center"
         >
-          <PokemonInfo pokemonUrl={pokemonUrl}/>
+          <PokemonInfo params={params}/>
         </Grid>
       </Grid>
     </ThemeProvider>

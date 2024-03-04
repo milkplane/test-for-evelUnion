@@ -1,28 +1,48 @@
-'use client'
+import axios from "axios";
+import styles from "../customizedComponents/MainChip.module.css";
+import Link from "next/link";
+import { Chip } from "@mui/material";
 
-import { PokemonEndPoint } from "../../app/page"
-import MainChip from "../customizedComponents/MainChip";
-
-type PokemonSelectProps = {
-  pokemonEndPoints: Array<PokemonEndPoint>;
-  onSelect: (pokemonUrl: string) => void;
+export type PokemonEndPoint = {
+  name: string;
+  url: string;
 }
 
-const PokemonSelect = (props: PokemonSelectProps) => {
-  const createHandleClick = (pokemonUrl: string) => {
-    return () => {
-      props.onSelect(pokemonUrl);
-    }
-  }
+type ResponsePokemonEndPoints = {
+  results: Array<PokemonEndPoint>;
+}
 
-  const chips = props.pokemonEndPoints.map((pokemonEndPoint) => {
+const getPokemonInfos = async () => {
+  const res = await axios.get<ResponsePokemonEndPoints>(process.env.POKEMON_INFOS_HOST as string, {
+    params: {
+      offset: 0,
+      limit: 10,
+    }
+  });
+
+  return res.data.results;
+}
+
+const getPokemonNames = async () => {
+  const pokemonInfos = await getPokemonInfos();
+  
+  return pokemonInfos.map((info) => info.name);
+}
+
+
+const PokemonSelect = async () => {
+  const pokemonNames = await getPokemonNames();
+  
+  const chips = pokemonNames.map((pokemonName) => {
     return (
-      <MainChip
-        label={pokemonEndPoint.name}
-        color="primary"
-        onClick={createHandleClick(pokemonEndPoint.url)}
-        key={pokemonEndPoint.url}
-      />
+      <Link href={`/${pokemonName}`}>
+        <Chip
+          color='primary'
+          className={styles.mainChip}
+          label={pokemonName}
+          key={pokemonName}
+        />
+      </Link>
     )
   })
 
