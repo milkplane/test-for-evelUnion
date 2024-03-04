@@ -1,39 +1,13 @@
-import axios from "axios";
-import styles from "../customizedComponents/MainChip.module.css";
+import styles from "../styles/MainChip.module.css";
 import Link from "next/link";
+import React from "react";
 import { Chip } from "@mui/material";
-
-export type PokemonEndPoint = {
-  name: string;
-  url: string;
-}
-
-type ResponsePokemonEndPoints = {
-  results: Array<PokemonEndPoint>;
-}
-
-const getPokemonInfos = async () => {
-  const res = await axios.get<ResponsePokemonEndPoints>(process.env.POKEMON_INFOS_HOST as string, {
-    params: {
-      offset: 0,
-      limit: 10,
-    }
-  });
-
-  return res.data.results;
-}
-
-const getPokemonNames = async () => {
-  const pokemonInfos = await getPokemonInfos();
-  
-  return pokemonInfos.map((info) => info.name);
-}
-
+import { getPokemonNames } from "../services/getPokemonNames";
 
 const PokemonSelect = async () => {
   const pokemonNames = await getPokemonNames();
   
-  const chips = pokemonNames.map((pokemonName) => {
+  return pokemonNames.map((pokemonName) => {
     return (
       <Link href={`/${pokemonName}`}>
         <Chip
@@ -45,10 +19,6 @@ const PokemonSelect = async () => {
       </Link>
     )
   })
-
-  return (
-    chips
-  )
 }
 
 export default PokemonSelect;

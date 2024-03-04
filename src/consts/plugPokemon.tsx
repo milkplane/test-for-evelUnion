@@ -1,4 +1,4 @@
-import { Pokemon } from "../components/PokemonInfo";
+import { Pokemon } from "../services/getPokemon";
 
 export const plugPokemon: Pokemon = {
   height: 0,

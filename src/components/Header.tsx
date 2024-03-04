@@ -1,6 +1,6 @@
+import styles from '../styles/Header.module.css';
 import { Box, Grid, Typography } from "@mui/material";
 import { pointer } from "../svg/pointer";
-import styles from './Header.module.css';
 
 const Header = () => {
   return (
@@ -12,7 +12,9 @@ const Header = () => {
       </Grid>
       <Grid ml='auto' item container width='auto' alignItems='center' justifyContent='center'>
         {pointer}
-        <Typography className={styles.additionalInfo}>Нажмите на нужное Покемона</Typography>
+        <Typography className={styles.additionalInfo}>
+          Нажмите на нужное Покемона
+        </Typography>
       </Grid>
     </Grid>
   )
